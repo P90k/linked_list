@@ -33,16 +33,33 @@ class LinkedList < Node
 
   def at(index)
     return nil if self.size <= index
+    return @head.value if index == 0
     node = self.head.next_node
     (index-1).times { node = node.next_node }
     node.value
   end
+
+  def pop
+    node = self.head
+    new_tail_index = self.size - 2
+    new_tail_index.times { node = node.next_node }
+    node.next_node = nil
+    @tail = node
+  end
+  
+  def contains?(value)
+    for i in 0...self.size
+      return true if self.at(i) == value
+    end
+    false
+  end
 end
 
 
-
+# example code to test methods
 list = LinkedList.new(Node.new('A'))
 list.append(Node.new('B'))
 list.append(Node.new('C'))
 list.append(Node.new('D'))
+list.append(Node.new('E'))
 list.prepend(Node.new('Hi'))
