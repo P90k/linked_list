@@ -9,7 +9,7 @@ class Node
 end
 
 class LinkedList < Node
-  attr_reader :head, :tail, :size
+  attr_reader :head, :tail
   def initialize(head=nil, tail=nil)
     @head = head
     @tail = tail
@@ -28,6 +28,11 @@ class LinkedList < Node
     @head = node
     @size += 1
   end
+
+  def size(list)
+    return 0 if list == nil
+    1 + size(list.next_node)
+  end
 end
 
 
@@ -38,6 +43,3 @@ list.append(Node.new('C'))
 list.append(Node.new('D'))
 list.prepend(Node.new('Hi'))
 p list.size
-puts list.head
-puts list.head.next_node
-puts list.head.next_node.next_node
