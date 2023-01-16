@@ -13,20 +13,17 @@ class LinkedList < Node
   def initialize(head=nil, tail=nil)
     @head = head
     @tail = tail
-    @size = 1
   end
 
   def append(node)
     return @head = node if @head.nil?
     @tail.nil? ? @head.next_node = node : @tail.next_node = node
     @tail = node
-    @size += 1
   end
 
   def prepend(node)
     node.next_node = @head
     @head = node
-    @size += 1
   end
 
   def size(list=self.head)
