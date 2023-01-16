@@ -33,10 +33,10 @@ class LinkedList < Node
 
   def at(index)
     return nil if self.size <= index
-    return @head.value if index == 0
+    return @head if index == 0
     node = self.head.next_node
     (index-1).times { node = node.next_node }
-    node.value
+    node
   end
 
   def pop
@@ -49,9 +49,16 @@ class LinkedList < Node
   
   def contains?(value)
     for i in 0...self.size
-      return true if self.at(i) == value
+      return true if self.at(i).value == value
     end
     false
+  end
+
+  def find(value)
+    for i in 0...self.size
+      return i if self.at(i).value == value
+    end
+    nil
   end
 end
 
@@ -63,3 +70,4 @@ list.append(Node.new('C'))
 list.append(Node.new('D'))
 list.append(Node.new('E'))
 list.prepend(Node.new('Hi'))
+p list.find('C')
