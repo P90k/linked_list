@@ -29,9 +29,16 @@ class LinkedList < Node
     @size += 1
   end
 
-  def size(list)
+  def size(list=self.head)
     return 0 if list == nil
     1 + size(list.next_node)
+  end
+
+  def at(index)
+    return nil if self.size <= index
+    node = self.head.next_node
+    (index-1).times { node = node.next_node }
+    node.value
   end
 end
 
@@ -42,4 +49,3 @@ list.append(Node.new('B'))
 list.append(Node.new('C'))
 list.append(Node.new('D'))
 list.prepend(Node.new('Hi'))
-p list.size
