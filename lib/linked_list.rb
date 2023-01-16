@@ -2,7 +2,8 @@
 
 class Node
   attr_accessor :value, :next_node
-  def initialize(data=nil, next_node=nil)
+
+  def initialize(data = nil, next_node = nil)
     @value = data
     @next_node = next_node
   end
@@ -10,13 +11,15 @@ end
 
 class LinkedList < Node
   attr_reader :head, :tail
-  def initialize(head=nil, tail=nil)
+
+  def initialize(head = nil, tail = nil)
     @head = head
     @tail = tail
   end
 
   def append(node)
     return @head = node if @head.nil?
+
     @tail.nil? ? @head.next_node = node : @tail.next_node = node
     @tail = node
   end
@@ -26,42 +29,45 @@ class LinkedList < Node
     @head = node
   end
 
-  def size(list=self.head)
-    return 0 if list == nil
+  def size(list = head)
+    return 0 if list.nil?
+
     1 + size(list.next_node)
   end
 
   def at(index)
-    return nil if self.size <= index
-    return @head if index == 0
-    node = self.head.next_node
-    (index-1).times { node = node.next_node }
+    return nil if size <= index
+    return @head if index.zero?
+
+    node = head.next_node
+    (index - 1).times { node = node.next_node }
     node
   end
 
   def pop
-    node = self.head
-    new_tail_index = self.size - 2
+    node = head
+    new_tail_index = size - 2
     new_tail_index.times { node = node.next_node }
     node.next_node = nil
     @tail = node
   end
-  
+
   def contains?(value)
-    for i in 0...self.size
-      return true if self.at(i).value == value
-    end
+    (0...size).each { |i| return true if at(i).value == value }
     false
   end
 
   def find(value)
-    for i in 0...self.size
-      return i if self.at(i).value == value
-    end
+    (0...size).each { |i| return i if at(i).value == value }
     nil
   end
-end
 
+  def to_s(list = head)
+    return 'nil' if list.nil?
+
+    "( #{list.value} ) -> #{to_s(list.next_node)}"
+  end
+end
 
 # example code to test methods
 list = LinkedList.new(Node.new('A'))
@@ -70,4 +76,4 @@ list.append(Node.new('C'))
 list.append(Node.new('D'))
 list.append(Node.new('E'))
 list.prepend(Node.new('Hi'))
-p list.find('C')
+print list.to_s
