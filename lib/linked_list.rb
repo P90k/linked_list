@@ -3,8 +3,8 @@
 class Node
   attr_accessor :value, :next_node
 
-  def initialize(data = nil, next_node = nil)
-    @value = data
+  def initialize(value = nil, next_node = nil)
+    @value = value
     @next_node = next_node
   end
 end
@@ -17,14 +17,16 @@ class LinkedList < Node
     @tail = tail
   end
 
-  def append(node)
+  def append(value)
+    node = Node.new(value)
     return @head = node if @head.nil?
 
     @tail.nil? ? @head.next_node = node : @tail.next_node = node
     @tail = node
   end
 
-  def prepend(node)
+  def prepend(value)
+    node = Node.new(value)
     node.next_node = @head
     @head = node
   end
@@ -84,7 +86,6 @@ end
 
 # example code to test methods
 list = LinkedList.new(Node.new('A'))
-list.append(Node.new('B'))
-list.append(Node.new('C'))
-list.append(Node.new('D'))
-list.append(Node.new('E'))
+list.append('B')
+list.append('C')
+p list.to_s
