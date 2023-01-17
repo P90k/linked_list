@@ -69,9 +69,16 @@ class LinkedList < Node
   end
 
   def insert_at(value, index)
-    previous_node, current_node = self.at(index-1), self.at(index)
+    previous_node = at(index - 1)
+    current_node = at(index)
     node = Node.new(value, current_node) # node will now point to current_node
     previous_node.next_node = node # make previous node point to node
+  end
+
+  def remove_at(index)
+    previous_node = at(index - 1)
+    new_next_node = at(index + 1)
+    previous_node.next_node = new_next_node
   end
 end
 
@@ -81,6 +88,3 @@ list.append(Node.new('B'))
 list.append(Node.new('C'))
 list.append(Node.new('D'))
 list.append(Node.new('E'))
-list.prepend(Node.new('Hi'))
-list.insert_at('V', 3)
-p list.to_s
