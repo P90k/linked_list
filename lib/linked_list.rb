@@ -9,7 +9,7 @@ class Node
   end
 end
 
-class LinkedList < Node
+class LinkedList
   attr_reader :head, :tail
 
   def initialize(head = nil, tail = nil)
@@ -88,4 +88,5 @@ end
 list = LinkedList.new(Node.new('A'))
 list.append('B')
 list.append('C')
+list.prepend('A')
 p list.to_s
